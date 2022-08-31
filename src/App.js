@@ -11,15 +11,17 @@ function App() {
     let randomIndex = Math.floor(Math.random() * contactsData.length);
     let randomContact = contactsData[randomIndex];
 
-    let newListContacts = [...firstFiveContacts]; //faço uma copia
+    let newListContacts = [...contacts]; //faço uma copia
     newListContacts.push(randomContact);
+
     setContacts(newListContacts);
 
     console.log(newListContacts);
   };
 
+
   const handleSortByName = () => {
-    const listByName = [...firstFiveContacts];
+    const listByName = [...contacts];
     listByName.sort((a, b) => {
       if (a.name > b.name) {
         console.log(a.name + " > " + b.name);
@@ -31,22 +33,28 @@ function App() {
       console.log(a.name + " = " + b.name);
       return 0;
     });
+
+    setContacts(listByName);
   };
 
+
   const handleSortByPopularity = () => {
-    const listByPopularity = [...firstFiveContacts];
+    const listByPopularity = [...contacts];
     listByPopularity.sort((a, b) => {
       if (a.popularity > b.popularity) {
         console.log(a.popularity + " > " + b.popularity);
-        return 1;
+        return -1;
       } else if (a.popularity < b.popularity) {
         console.log(a.popularity + " < " + b.popularity);
-        return -1;
+        return 1;
       }
       console.log(a.popularity + " = " + b.popularity);
       return 0;
     });
+
+    setContacts(listByPopularity);
   };
+
 
   return (
     <div className="App">
@@ -60,7 +68,7 @@ function App() {
             <th>Won Emmy</th>
           </tr>
 
-          {firstFiveContacts.map((contact, id) => {
+          {contacts.map((contact, id) => {
             return (
               <tr className="table_tr" key={id}>
                 <td>
